@@ -1,0 +1,37 @@
+{
+  "portal_name": "MahaDBT Post-Matric Scholarship Mock Portal",
+  "base_url": "http://localhost:8001/mahadbt",
+  "steps": {
+    "step_1_personal": {
+      "full_name": "#txtFullName",
+      "gender": "#selectGender",
+      "dob": "#txtDob",
+      "caste_category": "#selectCaste",
+      "annual_income": "#txtAnnualIncome",
+      "district": "#selectDistrict",
+      "btn_next": "#btnNextStep1"
+    },
+    "step_2_document": {
+      "file_input": "#fileUploadDoc",
+      "doc_type_select": "#selectDocType",
+      "upload_button": "#btnUploadDoc",
+      "file_size_error": "#lblFileSizeError",
+      "btn_next": "#btnNextStep2"
+    },
+    "step_3_verification": {
+      "captcha_display": "#imgCaptcha",
+      "captcha_input": "#txtCaptchaInput",
+      "otp_display_badge": "#lblOtpBadge",
+      "otp_input": "#txtOtpInput",
+      "btn_verify_submit": "#btnFinalSubmit"
+    },
+    "step_4_confirmation": {
+      "tracking_id": "#lblTrackingId",
+      "receipt_btn": "#btnDownloadReceipt"
+    }
+  },
+  "fallback_selectors": {
+    "full_name": ["input[name='fullName']", "input[placeholder*='Name']"],
+    "annual_income": ["input[name='income']", "input[placeholder*='Income']"]
+  }
+}

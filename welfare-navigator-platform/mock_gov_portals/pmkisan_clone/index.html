@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PM-KISAN Samman Nidhi Mock Portal [DEMO SIMULATION]</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    body { background-color: #f7fafc; color: #2d3748; }
+    .demo-banner { background: #2f855a; color: white; text-align: center; padding: 6px; font-size: 12px; font-weight: bold; }
+    header { background: #22543d; color: white; padding: 15px 30px; display: flex; align-items: center; justify-content: space-between; border-bottom: 4px solid #dd6b20; }
+    .header-title h1 { font-size: 20px; font-weight: bold; }
+    .header-title p { font-size: 12px; opacity: 0.9; }
+    .container { max-width: 900px; margin: 30px auto; background: white; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); overflow: hidden; padding: 30px; }
+    .form-group { margin-bottom: 18px; }
+    label { display: block; margin-bottom: 6px; font-size: 13px; font-weight: 600; color: #2d3748; }
+    input, select { width: 100%; padding: 10px 12px; border: 1px solid #cbd5e0; border-radius: 6px; font-size: 14px; }
+    .btn { padding: 10px 20px; font-size: 14px; font-weight: bold; border-radius: 6px; cursor: pointer; border: none; }
+    .btn-green { background: #2f855a; color: white; }
+    .badge-otp { background: #feebc8; color: #7b341e; padding: 4px 8px; border-radius: 4px; font-family: monospace; font-size: 14px; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <div class="demo-banner">[DEMO SIMULATION - PM-KISAN AGRICULTURE CLONE - FOR LOCAL RPA TESTING]</div>
+  <header>
+    <div class="header-title">
+      <h1>Pradhan Mantri Kisan Samman Nidhi (PM-KISAN)</h1>
+      <p>Department of Agriculture & Farmers Welfare, Government of India</p>
+    </div>
+  </header>
+
+  <div class="container">
+    <h2 style="margin-bottom: 20px; color: #22543d;">New Farmer Registration Portal</h2>
+    <div id="pmk-step-1">
+      <div class="form-group">
+        <label for="txtFarmerName">Farmer Name:</label>
+        <input type="text" id="txtFarmerName" value="Ramesh Shamrao Patil">
+      </div>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+        <div class="form-group">
+          <label for="selectFarmerGender">Gender:</label>
+          <select id="selectFarmerGender">
+            <option value="MALE" selected>Male</option>
+            <option value="FEMALE">Female</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="txtLandholdingAcres">Cultivable Landholding (Acres):</label>
+          <input type="number" id="txtLandholdingAcres" value="2.5" step="0.1">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="selectFarmerDistrict">District (Maharashtra):</label>
+        <select id="selectFarmerDistrict">
+          <option value="Kolhapur" selected>Kolhapur</option>
+          <option value="Pune">Pune</option>
+          <option value="Nashik">Nashik</option>
+        </select>
+      </div>
+
+      <div style="background: #edf2f7; padding: 15px; border-radius: 6px; margin-bottom: 20px;">
+        <h4 style="margin-bottom: 10px;">Security Verification & OTP</h4>
+        <div style="display: flex; gap: 15px; align-items: center; margin-bottom: 10px;">
+          <div id="imgCaptchaPmk" style="background: #2d3748; color: #68d391; font-weight: bold; letter-spacing: 4px; padding: 8px 16px; border-radius: 4px;">PMK391</div>
+          <input type="text" id="txtCaptchaPmk" placeholder="Enter CAPTCHA" style="max-width: 150px;">
+        </div>
+        <div>
+          <span>Mock SMS OTP: </span><span id="lblOtpBadgePmk" class="badge-otp">918234</span>
+          <input type="text" id="txtOtpPmk" placeholder="Enter OTP" style="max-width: 150px; margin-left: 10px;">
+        </div>
+      </div>
+
+      <button type="button" id="btnFinalSubmitPmk" class="btn btn-green" onclick="submitPmk()">Submit Farmer Registration</button>
+    </div>
+
+    <div id="pmk-success" style="display: none; text-align: center; padding: 25px;">
+      <h3 style="color: #2f855a; margin-bottom: 10px;">Registration Successful!</h3>
+      <p style="margin-bottom: 15px;">Your PM-KISAN beneficiary record has been created.</p>
+      <div>Registration ID: <strong id="lblTrackingIdPmk" style="font-family: monospace; font-size: 20px;">PMK-2026-781923</strong></div>
+    </div>
+  </div>
+
+  <script>
+    function submitPmk() {
+      const tracking = "PMK-2026-" + Math.floor(100000 + Math.random() * 900000);
+      document.getElementById('lblTrackingIdPmk').textContent = tracking;
+      document.getElementById('pmk-step-1').style.display = 'none';
+      document.getElementById('pmk-success').style.display = 'block';
+    }
+  </script>
+</body>
+</html>

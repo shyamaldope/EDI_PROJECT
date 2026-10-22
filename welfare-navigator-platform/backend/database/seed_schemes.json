@@ -1,0 +1,540 @@
+[
+  {
+    "id": "pm_kisan",
+    "scheme_code": "GOI-AGRI-001",
+    "scheme_name": "Pradhan Mantri Kisan Samman Nidhi (PM-KISAN)",
+    "scheme_name_mr": "प्रधानमंत्री किसान सन्मान निधी",
+    "department": "Department of Agriculture and Farmers Welfare (Central)",
+    "target_beneficiary": "Small & Marginal Landholding Farmers",
+    "benefit_amount": 6000.0,
+    "benefit_type": "DIRECT_BENEFIT_TRANSFER",
+    "sla_days": 30,
+    "status": "ACTIVE",
+    "version": 1,
+    "dom_mapping_key": "pmkisan_registration",
+    "mutual_exclusions": ["pm_svanidhi"],
+    "citations": [
+      {"field": "occupation", "page": 1, "clause": "Operational Guidelines 2019, Para 2.1"},
+      {"field": "landholding_acres", "page": 2, "clause": "Operational Guidelines 2019, Para 3.2"},
+      {"field": "annual_income", "page": 2, "clause": "Exclusion Criteria, Para 4(b)"}
+    ],
+    "ast_rule": {
+      "operator": "AND",
+      "children": [
+        {"field": "occupation", "operator": "EQUALS", "value": "Farmer", "label": "Must be an active farmer"},
+        {"field": "landholding_acres", "operator": "GREATER_THAN", "value": 0.0, "label": "Must hold agricultural land"},
+        {"field": "landholding_acres", "operator": "LESS_EQUAL", "value": 5.0, "label": "Landholding must not exceed 5 acres"},
+        {"field": "annual_income", "operator": "LESS_EQUAL", "value": 1000000.0, "label": "Income must be within non-exclusion limit"}
+      ]
+    }
+  },
+  {
+    "id": "namo_shetkari",
+    "scheme_code": "MAHA-AGRI-002",
+    "scheme_name": "Namo Shetkari Mahasanman Nidhi Yojana",
+    "scheme_name_mr": "नमो शेतकरी महासन्मान निधी योजना",
+    "department": "Agriculture Department, Government of Maharashtra",
+    "target_beneficiary": "Maharashtra Farmers Eligible for PM-KISAN",
+    "benefit_amount": 6000.0,
+    "benefit_type": "DIRECT_BENEFIT_TRANSFER",
+    "sla_days": 21,
+    "status": "ACTIVE",
+    "version": 1,
+    "dom_mapping_key": "pmkisan_registration",
+    "mutual_exclusions": [],
+    "citations": [
+      {"field": "state", "page": 1, "clause": "GR No. NSM-2023/CR-45/11-A, Para 1"},
+      {"field": "landholding_acres", "page": 1, "clause": "GR No. NSM-2023/CR-45/11-A, Para 3"}
+    ],
+    "ast_rule": {
+      "operator": "AND",
+      "children": [
+        {"field": "state", "operator": "EQUALS", "value": "Maharashtra", "label": "Resident of Maharashtra"},
+        {"field": "occupation", "operator": "EQUALS", "value": "Farmer", "label": "Active farmer"},
+        {"field": "landholding_acres", "operator": "GREATER_THAN", "value": 0.0, "label": "Agricultural landholder"}
+      ]
+    }
+  },
+  {
+    "id": "mahadbt_post_matric_obc",
+    "scheme_code": "MAHA-OBC-003",
+    "scheme_name": "Post-Matric Scholarship to OBC Students (MahaDBT)",
+    "scheme_name_mr": "इतर मागासवर्गीय विद्यार्थ्यांसाठी मॅट्रिकोत्तर शिष्यवृत्ती",
+    "department": "VJNT, OBC and SBC Welfare Department, Maharashtra",
+    "target_beneficiary": "OBC Students pursuing Higher Education",
+    "benefit_amount": 35000.0,
+    "benefit_type": "TUITION_WAIVER",
+    "sla_days": 45,
+    "status": "ACTIVE",
+    "version": 1,
+    "dom_mapping_key": "mahadbt_post_matric",
+    "mutual_exclusions": ["mahadbt_post_matric_sc", "mahadbt_post_matric_st"],
+    "citations": [
+      {"field": "caste_category", "page": 1, "clause": "MahaDBT Guidelines 2024, Section 2"},
+      {"field": "annual_income", "page": 2, "clause": "MahaDBT Guidelines 2024, Section 4.1"},
+      {"field": "is_student", "page": 1, "clause": "MahaDBT Guidelines 2024, Section 1"}
+    ],
+    "ast_rule": {
+      "operator": "AND",
+      "children": [
+        {"field": "is_student", "operator": "EQUALS", "value": true, "label": "Must be currently enrolled as student"},
+        {"field": "caste_category", "operator": "IN", "value": ["OBC", "SBC", "VJNT"], "label": "Caste must be OBC, SBC, or VJNT"},
+        {"field": "annual_income", "operator": "LESS_EQUAL", "value": 150000.0, "label": "Family income <= 1.5 Lakhs"},
+        {"field": "state", "operator": "EQUALS", "value": "Maharashtra", "label": "Domicile of Maharashtra"}
+      ]
+    }
+  },
+  {
+    "id": "mahadbt_post_matric_sc",
+    "scheme_code": "MAHA-SC-004",
+    "scheme_name": "Government of India Post-Matric Scholarship for SC Students",
+    "scheme_name_mr": "अनुसूचित जातीच्या विद्यार्थ्यांसाठी भारत सरकार मॅट्रिकोत्तर शिष्यवृत्ती",
+    "department": "Social Justice and Special Assistance Department, Maharashtra",
+    "target_beneficiary": "Scheduled Caste Students in Higher Education",
+    "benefit_amount": 65000.0,
+    "benefit_type": "TUITION_WAIVER",
+    "sla_days": 30,
+    "status": "ACTIVE",
+    "version": 1,
+    "dom_mapping_key": "mahadbt_post_matric",
+    "mutual_exclusions": ["mahadbt_post_matric_obc", "mahadbt_post_matric_st"],
+    "citations": [
+      {"field": "caste_category", "page": 1, "clause": "GOI SC Guidelines, Rule 3(i)"},
+      {"field": "annual_income", "page": 2, "clause": "GOI SC Guidelines, Rule 4(a)"}
+    ],
+    "ast_rule": {
+      "operator": "AND",
+      "children": [
+        {"field": "is_student", "operator": "EQUALS", "value": true, "label": "Enrolled student"},
+        {"field": "caste_category", "operator": "EQUALS", "value": "SC", "label": "Caste must be Scheduled Caste (SC)"},
+        {"field": "annual_income", "operator": "LESS_EQUAL", "value": 250000.0, "label": "Family annual income <= 2.5 Lakhs"},
+        {"field": "state", "operator": "EQUALS", "value": "Maharashtra", "label": "Maharashtra Domicile"}
+      ]
+    }
+  },
+  {
+    "id": "mahadbt_post_matric_st",
+    "scheme_code": "MAHA-ST-005",
+    "scheme_name": "Post-Matric Scholarship Scheme for ST Students",
+    "scheme_name_mr": "अनुसूचित जमातीच्या विद्यार्थ्यांसाठी मॅट्रिकोत्तर शिष्यवृत्ती",
+    "department": "Tribal Development Department, Maharashtra",
+    "target_beneficiary": "Scheduled Tribe Students in Higher Education",
+    "benefit_amount": 60000.0,
+    "benefit_type": "TUITION_WAIVER",
+    "sla_days": 30,
+    "status": "ACTIVE",
+    "version": 1,
+    "dom_mapping_key": "mahadbt_post_matric",
+    "mutual_exclusions": ["mahadbt_post_matric_obc", "mahadbt_post_matric_sc"],
+    "citations": [
+      {"field": "caste_category", "page": 1, "clause": "Tribal Welfare GR 2023, Para 2"}
+    ],
+    "ast_rule": {
+      "operator": "AND",
+      "children": [
+        {"field": "is_student", "operator": "EQUALS", "value": true, "label": "Enrolled student"},
+        {"field": "caste_category", "operator": "EQUALS", "value": "ST", "label": "Caste must be Scheduled Tribe (ST)"},
+        {"field": "annual_income", "operator": "LESS_EQUAL", "value": 250000.0, "label": "Family annual income <= 2.5 Lakhs"},
+        {"field": "state", "operator": "EQUALS", "value": "Maharashtra", "label": "Maharashtra Domicile"}
+      ]
+    }
+  },
+  {
+    "id": "dr_punjabrao_hostel",
+    "scheme_code": "MAHA-HOSTEL-006",
+    "scheme_name": "Dr. Punjabrao Deshmukh Vasatigruh Nirvah Bhatta Yojana",
+    "scheme_name_mr": "डॉ. पंजाबराव देशमुख वसतिगृह निर्वाह भत्ता योजना",
+    "department": "Higher and Technical Education Department, Maharashtra",
+    "target_beneficiary": "Children of Registered Marginal Farmers & Labourers",
+    "benefit_amount": 30000.0,
+    "benefit_type": "DIRECT_BENEFIT_TRANSFER",
+    "sla_days": 30,
+    "status": "ACTIVE",
+    "version": 1,
+    "dom_mapping_key": "mahadbt_post_matric",
+    "mutual_exclusions": [],
+    "citations": [
+      {"field": "annual_income", "page": 2, "clause": "GR HED-2018/CR-190/TE-4, Para 3"}
+    ],
+    "ast_rule": {
+      "operator": "AND",
+      "children": [
+        {"field": "is_student", "operator": "EQUALS", "value": true, "label": "Pursuing professional/higher education"},
+        {"field": "annual_income", "operator": "LESS_EQUAL", "value": 800000.0, "label": "Family income <= 8 Lakhs"},
+        {"field": "landholding_acres", "operator": "LESS_EQUAL", "value": 5.0, "label": "Marginal farmer or registered labourer"}
+      ]
+    }
+  },
+  {
+    "id": "ladki_bahin",
+    "scheme_code": "MAHA-WOMEN-007",
+    "scheme_name": "Mukhyamantri Majhi Ladki Bahin Yojana",
+    "scheme_name_mr": "मुख्यमंत्री माझी लाडकी बहीण योजना",
+    "department": "Women and Child Development Department, Maharashtra",
+    "target_beneficiary": "Women between ages 21 and 65 in Low-Income Households",
+    "benefit_amount": 18000.0,
+    "benefit_type": "DIRECT_BENEFIT_TRANSFER",
+    "sla_days": 15,
+    "status": "ACTIVE",
+    "version": 1,
+    "dom_mapping_key": "mahadbt_post_matric",
+    "mutual_exclusions": ["sanjay_gandhi_niradhar"],
+    "citations": [
+      {"field": "gender", "page": 1, "clause": "GR WCD-2024/CR-112/W-3, Para 2(a)"},
+      {"field": "age", "page": 1, "clause": "GR WCD-2024/CR-112/W-3, Para 2(b)"},
+      {"field": "annual_income", "page": 2, "clause": "GR WCD-2024/CR-112/W-3, Para 3"}
+    ],
+    "ast_rule": {
+      "operator": "AND",
+      "children": [
+        {"field": "gender", "operator": "EQUALS", "value": "FEMALE", "label": "Must be female"},
+        {"field": "age", "operator": "GREATER_EQUAL", "value": 21, "label": "Minimum age 21 years"},
+        {"field": "age", "operator": "LESS_EQUAL", "value": 65, "label": "Maximum age 65 years"},
+        {"field": "annual_income", "operator": "LESS_EQUAL", "value": 250000.0, "label": "Family annual income <= 2.5 Lakhs"},
+        {"field": "state", "operator": "EQUALS", "value": "Maharashtra", "label": "Maharashtra Resident"}
+      ]
+    }
+  },
+  {
+    "id": "sanjay_gandhi_niradhar",
+    "scheme_code": "MAHA-PENSION-008",
+    "scheme_name": "Sanjay Gandhi Niradhar Anudan Yojana",
+    "scheme_name_mr": "संजय गांधी निराधार अनुदान योजना",
+    "department": "Social Justice and Special Assistance Department, Maharashtra",
+    "target_beneficiary": "Destitute persons, widows, physically challenged, and elderly",
+    "benefit_amount": 18000.0,
+    "benefit_type": "PENSION",
+    "sla_days": 30,
+    "status": "ACTIVE",
+    "version": 1,
+    "dom_mapping_key": "mahadbt_post_matric",
+    "mutual_exclusions": ["shravanbal_seva", "ladki_bahin"],
+    "citations": [
+      {"field": "annual_income", "page": 1, "clause": "SGN-1098/CR-115/BCW-3, Rule 2"},
+      {"field": "age", "page": 1, "clause": "SGN-1098/CR-115/BCW-3, Rule 3"}
+    ],
+    "ast_rule": {
+      "operator": "AND",
+      "children": [
+        {"field": "annual_income", "operator": "LESS_EQUAL", "value": 50000.0, "label": "Annual family income <= 50,000"},
+        {
+          "operator": "OR",
+          "children": [
+            {"field": "age", "operator": "GREATER_EQUAL", "value": 65, "label": "Senior citizen age 65+"},
+            {"field": "has_disability", "operator": "EQUALS", "value": true, "label": "Person with disability"},
+            {"field": "gender", "operator": "EQUALS", "value": "FEMALE", "label": "Destitute woman / widow"}
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "shravanbal_seva",
+    "scheme_code": "MAHA-PENSION-009",
+    "scheme_name": "Shravanbal Seva Nivruttivetan Yojana",
+    "scheme_name_mr": "श्रावणबाळ सेवा राज्य निवृत्तीवेतन योजना",
+    "department": "Social Justice and Special Assistance Department, Maharashtra",
+    "target_beneficiary": "Destitute Senior Citizens (65+ years)",
+    "benefit_amount": 12000.0,
+    "benefit_type": "PENSION",
+    "sla_days": 30,
+    "status": "ACTIVE",
+    "version": 1,
+    "dom_mapping_key": "mahadbt_post_matric",
+    "mutual_exclusions": ["sanjay_gandhi_niradhar"],
+    "citations": [
+      {"field": "age", "page": 1, "clause": "SSNY GR 2019, Para 1"},
+      {"field": "annual_income", "page": 1, "clause": "SSNY GR 2019, Para 2"}
+    ],
+    "ast_rule": {
+      "operator": "AND",
+      "children": [
+        {"field": "age", "operator": "GREATER_EQUAL", "value": 65, "label": "Age 65 years or above"},
+        {"field": "annual_income", "operator": "LESS_EQUAL", "value": 21000.0, "label": "Annual family income <= 21,000"}
+      ]
+    }
+  },
+  {
+    "id": "jyotirao_phule_arogya",
+    "scheme_code": "MAHA-HEALTH-010",
+    "scheme_name": "Mahatma Jyotirao Phule Jan Arogya Yojana (MJPJAY)",
+    "scheme_name_mr": "महात्मा ज्योतिराव फुले जन आरोग्य योजना",
+    "department": "Public Health Department, Maharashtra",
+    "target_beneficiary": "BPL and Low Income Families in Maharashtra",
+    "benefit_amount": 500000.0,
+    "benefit_type": "SUBSIDY",
+    "sla_days": 7,
+    "status": "ACTIVE",
+    "version": 1,
+    "dom_mapping_key": "mahadbt_post_matric",
+    "mutual_exclusions": [],
+    "citations": [
+      {"field": "annual_income", "page": 2, "clause": "MJPJAY Policy Document 2023, Section 4"}
+    ],
+    "ast_rule": {
+      "operator": "AND",
+      "children": [
+        {"field": "state", "operator": "EQUALS", "value": "Maharashtra", "label": "Maharashtra resident"},
+        {"field": "annual_income", "operator": "LESS_EQUAL", "value": 250000.0, "label": "Annual family income <= 2.5 Lakhs"}
+      ]
+    }
+  },
+  {
+    "id": "pm_awas_gramin",
+    "scheme_code": "GOI-HOUSING-011",
+    "scheme_name": "Pradhan Mantri Awaas Yojana - Gramin (PMAY-G)",
+    "scheme_name_mr": "प्रधानमंत्री आवास योजना - ग्रामीण",
+    "department": "Ministry of Rural Development, Government of India",
+    "target_beneficiary": "Homeless and Kutcha House Dwellers in Rural Areas",
+    "benefit_amount": 120000.0,
+    "benefit_type": "DIRECT_BENEFIT_TRANSFER",
+    "sla_days": 60,
+    "status": "ACTIVE",
+    "version": 1,
+    "dom_mapping_key": "pmkisan_registration",
+    "mutual_exclusions": ["ramai_awas"],
+    "citations": [
+      {"field": "annual_income", "page": 4, "clause": "PMAY-G Framework, Para 3.1"}
+    ],
+    "ast_rule": {
+      "operator": "AND",
+      "children": [
+        {"field": "annual_income", "operator": "LESS_EQUAL", "value": 120000.0, "label": "Annual income <= 1.2 Lakhs"},
+        {"field": "landholding_acres", "operator": "LESS_EQUAL", "value": 2.5, "label": "Marginal or landless citizen"}
+      ]
+    }
+  },
+  {
+    "id": "pm_fasal_bima",
+    "scheme_code": "GOI-AGRI-012",
+    "scheme_name": "Pradhan Mantri Fasal Bima Yojana (PMFBY)",
+    "scheme_name_mr": "प्रधानमंत्री पीक विमा योजना",
+    "department": "Ministry of Agriculture, Government of India",
+    "target_beneficiary": "Farmers suffering crop damage or yield loss",
+    "benefit_amount": 15000.0,
+    "benefit_type": "SUBSIDY",
+    "sla_days": 30,
+    "status": "ACTIVE",
+    "version": 1,
+    "dom_mapping_key": "pmkisan_registration",
+    "mutual_exclusions": [],
+    "citations": [
+      {"field": "occupation", "page": 1, "clause": "PMFBY Revised Guidelines 2020, Para 4"}
+    ],
+    "ast_rule": {
+      "operator": "AND",
+      "children": [
+        {"field": "occupation", "operator": "EQUALS", "value": "Farmer", "label": "Must be an active cultivator"},
+        {"field": "landholding_acres", "operator": "GREATER_THAN", "value": 0.0, "label": "Must hold agricultural land"}
+      ]
+    }
+  },
+  {
+    "id": "sukanya_samriddhi",
+    "scheme_code": "GOI-GIRL-013",
+    "scheme_name": "Sukanya Samriddhi Yojana",
+    "scheme_name_mr": "सुकन्या समृद्धी योजना",
+    "department": "Ministry of Finance, Government of India",
+    "target_beneficiary": "Parents of Girl Children under age 10",
+    "benefit_amount": 10000.0,
+    "benefit_type": "SUBSIDY",
+    "sla_days": 15,
+    "status": "ACTIVE",
+    "version": 1,
+    "dom_mapping_key": "mahadbt_post_matric",
+    "mutual_exclusions": [],
+    "citations": [
+      {"field": "gender", "page": 1, "clause": "SSY Rules 2016, Rule 3"},
+      {"field": "age", "page": 1, "clause": "SSY Rules 2016, Rule 4"}
+    ],
+    "ast_rule": {
+      "operator": "AND",
+      "children": [
+        {"field": "gender", "operator": "EQUALS", "value": "FEMALE", "label": "Must be female"},
+        {"field": "age", "operator": "LESS_EQUAL", "value": 10, "label": "Age must be 10 or younger"}
+      ]
+    }
+  },
+  {
+    "id": "majhi_kanya_bhagyashree",
+    "scheme_code": "MAHA-GIRL-014",
+    "scheme_name": "Majhi Kanya Bhagyashree Yojana",
+    "scheme_name_mr": "माझी कन्या भाग्यश्री योजना",
+    "department": "Women and Child Development Department, Maharashtra",
+    "target_beneficiary": "Families with One or Two Girl Children",
+    "benefit_amount": 50000.0,
+    "benefit_type": "DIRECT_BENEFIT_TRANSFER",
+    "sla_days": 30,
+    "status": "ACTIVE",
+    "version": 1,
+    "dom_mapping_key": "mahadbt_post_matric",
+    "mutual_exclusions": [],
+    "citations": [
+      {"field": "gender", "page": 2, "clause": "MKB Scheme GR 2017, Section 3"},
+      {"field": "annual_income", "page": 2, "clause": "MKB Scheme GR 2017, Section 4"}
+    ],
+    "ast_rule": {
+      "operator": "AND",
+      "children": [
+        {"field": "gender", "operator": "EQUALS", "value": "FEMALE", "label": "Target beneficiary female"},
+        {"field": "age", "operator": "LESS_EQUAL", "value": 18, "label": "Minor female beneficiary"},
+        {"field": "annual_income", "operator": "LESS_EQUAL", "value": 750000.0, "label": "Family income <= 7.5 Lakhs"}
+      ]
+    }
+  },
+  {
+    "id": "bal_sangopan",
+    "scheme_code": "MAHA-CHILD-015",
+    "scheme_name": "Bal Sangopan Yojana",
+    "scheme_name_mr": "बाल संगोपन योजना",
+    "department": "Women and Child Development Department, Maharashtra",
+    "target_beneficiary": "Children in Difficult Circumstances, Single Parent, or Orphaned",
+    "benefit_amount": 30000.0,
+    "benefit_type": "DIRECT_BENEFIT_TRANSFER",
+    "sla_days": 30,
+    "status": "ACTIVE",
+    "version": 1,
+    "dom_mapping_key": "mahadbt_post_matric",
+    "mutual_exclusions": [],
+    "citations": [
+      {"field": "age", "page": 1, "clause": "BSY Guidelines 2022, Para 2"}
+    ],
+    "ast_rule": {
+      "operator": "AND",
+      "children": [
+        {"field": "age", "operator": "LESS_EQUAL", "value": 18, "label": "Child under 18"},
+        {"field": "annual_income", "operator": "LESS_EQUAL", "value": 100000.0, "label": "Economically disadvantaged family <= 1.0 Lakh"}
+      ]
+    }
+  },
+  {
+    "id": "annasaheb_patil_loan",
+    "scheme_code": "MAHA-LOAN-016",
+    "scheme_name": "Annasaheb Patil Arthik Vikas Mahamandal Interest Subvention",
+    "scheme_name_mr": "अण्णासाहेब पाटील आर्थिक मागास विकास महामंडळ व्याज परतावा योजना",
+    "department": "Skill Development and Entrepreneurship Department, Maharashtra",
+    "target_beneficiary": "Economically Weak Open/Maratha Youth Entrepreneurs",
+    "benefit_amount": 300000.0,
+    "benefit_type": "SUBSIDY",
+    "sla_days": 45,
+    "status": "ACTIVE",
+    "version": 1,
+    "dom_mapping_key": "mahadbt_post_matric",
+    "mutual_exclusions": [],
+    "citations": [
+      {"field": "caste_category", "page": 2, "clause": "APAVM Policy 2021, Para 3"},
+      {"field": "age", "page": 2, "clause": "APAVM Policy 2021, Para 4"}
+    ],
+    "ast_rule": {
+      "operator": "AND",
+      "children": [
+        {"field": "age", "operator": "GREATER_EQUAL", "value": 18, "label": "Minimum age 18"},
+        {"field": "age", "operator": "LESS_EQUAL", "value": 45, "label": "Maximum age 45"},
+        {"field": "caste_category", "operator": "IN", "value": ["OPEN", "EWS", "SEBC"], "label": "Category OPEN, EWS, or SEBC"},
+        {"field": "annual_income", "operator": "LESS_EQUAL", "value": 800000.0, "label": "Family income <= 8 Lakhs"}
+      ]
+    }
+  },
+  {
+    "id": "divyang_swavalamban",
+    "scheme_code": "MAHA-DIVYANG-017",
+    "scheme_name": "Maharashtra Divyang Pension & Swavalamban Scheme",
+    "scheme_name_mr": "महाराष्ट्र दिव्यांग पेन्शन आणि स्वावलंबन योजना",
+    "department": "Divyang Welfare Department, Maharashtra",
+    "target_beneficiary": "Persons with Benchmark Disabilities (40%+)",
+    "benefit_amount": 18000.0,
+    "benefit_type": "PENSION",
+    "sla_days": 30,
+    "status": "ACTIVE",
+    "version": 1,
+    "dom_mapping_key": "mahadbt_post_matric",
+    "mutual_exclusions": [],
+    "citations": [
+      {"field": "has_disability", "page": 1, "clause": "Divyang GR 2023, Para 2"}
+    ],
+    "ast_rule": {
+      "operator": "AND",
+      "children": [
+        {"field": "has_disability", "operator": "EQUALS", "value": true, "label": "Person with certified disability"},
+        {"field": "annual_income", "operator": "LESS_EQUAL", "value": 100000.0, "label": "Family income <= 1.0 Lakh"}
+      ]
+    }
+  },
+  {
+    "id": "maha_krishi_urja_solar",
+    "scheme_code": "MAHA-SOLAR-018",
+    "scheme_name": "Maha Krishi Urja Solar Agricultural Pump Yojana",
+    "scheme_name_mr": "महा कृषी ऊर्जा सौर कृषी पंप योजना",
+    "department": "Energy Department / MSEDCL, Maharashtra",
+    "target_beneficiary": "Farmers needing Off-Grid Irrigation Power",
+    "benefit_amount": 45000.0,
+    "benefit_type": "SUBSIDY",
+    "sla_days": 45,
+    "status": "ACTIVE",
+    "version": 1,
+    "dom_mapping_key": "pmkisan_registration",
+    "mutual_exclusions": [],
+    "citations": [
+      {"field": "occupation", "page": 1, "clause": "Solar Pump GR 2023, Para 3"},
+      {"field": "landholding_acres", "page": 2, "clause": "Solar Pump GR 2023, Para 4"}
+    ],
+    "ast_rule": {
+      "operator": "AND",
+      "children": [
+        {"field": "occupation", "operator": "EQUALS", "value": "Farmer", "label": "Cultivating farmer"},
+        {"field": "landholding_acres", "operator": "GREATER_EQUAL", "value": 1.0, "label": "Minimum landholding 1.0 acre"}
+      ]
+    }
+  },
+  {
+    "id": "pm_svanidhi",
+    "scheme_code": "GOI-URBAN-019",
+    "scheme_name": "PM Street Vendor's AtmaNirbhar Nidhi (PM SVANidhi)",
+    "scheme_name_mr": "पीएम स्वनिधी योजना",
+    "department": "Ministry of Housing and Urban Affairs, Government of India",
+    "target_beneficiary": "Urban & Peri-Urban Street Vendors",
+    "benefit_amount": 10000.0,
+    "benefit_type": "SUBSIDY",
+    "sla_days": 15,
+    "status": "ACTIVE",
+    "version": 1,
+    "dom_mapping_key": "pmkisan_registration",
+    "mutual_exclusions": ["pm_kisan"],
+    "citations": [
+      {"field": "occupation", "page": 1, "clause": "PM SVANidhi Scheme Document, Para 2"}
+    ],
+    "ast_rule": {
+      "operator": "AND",
+      "children": [
+        {"field": "occupation", "operator": "EQUALS", "value": "Street Vendor", "label": "Identified street vendor"},
+        {"field": "annual_income", "operator": "LESS_EQUAL", "value": 200000.0, "label": "Annual income <= 2.0 Lakhs"}
+      ]
+    }
+  },
+  {
+    "id": "ramai_awas",
+    "scheme_code": "MAHA-HOUSING-020",
+    "scheme_name": "Ramai Awas Gharkul Yojana",
+    "scheme_name_mr": "रमाई आवास घरकुल योजना",
+    "department": "Social Justice and Special Assistance Department, Maharashtra",
+    "target_beneficiary": "SC and Neo-Buddhist Homeless Citizens in Rural/Urban Areas",
+    "benefit_amount": 130000.0,
+    "benefit_type": "DIRECT_BENEFIT_TRANSFER",
+    "sla_days": 60,
+    "status": "ACTIVE",
+    "version": 1,
+    "dom_mapping_key": "pmkisan_registration",
+    "mutual_exclusions": ["pm_awas_gramin"],
+    "citations": [
+      {"field": "caste_category", "page": 1, "clause": "Ramai Awas GR 2018, Para 2"},
+      {"field": "annual_income", "page": 2, "clause": "Ramai Awas GR 2018, Para 3"}
+    ],
+    "ast_rule": {
+      "operator": "AND",
+      "children": [
+        {"field": "caste_category", "operator": "EQUALS", "value": "SC", "label": "Must belong to Scheduled Caste (SC)"},
+        {"field": "annual_income", "operator": "LESS_EQUAL", "value": 100000.0, "label": "Annual income <= 1.0 Lakh"}
+      ]
+    }
+  }
+]

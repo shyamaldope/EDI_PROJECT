@@ -1,0 +1,50 @@
+# ==========================================
+# welfare-navigator-platform .gitignore
+# ==========================================
+
+# Virtual Environments
+venv/
+.venv/
+env/
+
+# Python caches and bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+*.pytest_cache/
+.coverage
+htmlcov/
+
+# Databases
+*.db
+*.sqlite
+*.sqlite3
+
+# Node dependencies and build output
+node_modules/
+dist/
+build/
+.npm/
+
+# Environment files & secrets
+.env
+.env.local
+.env.*.local
+!.env.example
+
+# Runtime uploads and generated test files
+backend/uploads/*.jpg
+backend/uploads/*.png
+backend/uploads/affidavits/*
+!backend/uploads/affidavits/.gitkeep
+backend/uploads/grievances/*
+!backend/uploads/grievances/.gitkeep
+backend/uploads/receipts/*
+!backend/uploads/receipts/.gitkeep
+
+# IDEs & OS files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.log

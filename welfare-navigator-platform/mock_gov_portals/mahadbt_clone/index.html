@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aaple Sarkar DBT - MahaDBT Portal Clone [DEMO SIMULATION]</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    body { background-color: #f4f6f9; color: #333; }
+    .demo-banner { background: #d97706; color: white; text-align: center; padding: 6px; font-size: 12px; font-weight: bold; letter-spacing: 1px; }
+    header { background: #1e3a8a; color: white; padding: 15px 30px; display: flex; align-items: center; justify-content: space-between; border-bottom: 4px solid #f97316; }
+    .header-title h1 { font-size: 20px; font-weight: bold; }
+    .header-title p { font-size: 12px; opacity: 0.9; }
+    .container { max-width: 900px; margin: 30px auto; background: white; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); overflow: hidden; }
+    .stepper { display: flex; background: #e2e8f0; border-bottom: 1px solid #cbd5e1; }
+    .step { flex: 1; padding: 12px 10px; text-align: center; font-size: 13px; font-weight: 600; color: #64748b; }
+    .step.active { background: #2563eb; color: white; }
+    .step.completed { background: #10b981; color: white; }
+    .form-content { padding: 30px; }
+    .step-section { display: none; }
+    .step-section.active { display: block; }
+    .form-group { margin-bottom: 18px; }
+    label { display: block; margin-bottom: 6px; font-size: 13px; font-weight: 600; color: #334155; }
+    input, select { width: 100%; padding: 10px 12px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 14px; }
+    input:focus, select:focus { outline: none; border-color: #2563eb; ring: 2px solid #bfdbfe; }
+    .btn { padding: 10px 20px; font-size: 14px; font-weight: bold; border-radius: 6px; cursor: pointer; border: none; }
+    .btn-primary { background: #2563eb; color: white; }
+    .btn-primary:hover { background: #1d4ed8; }
+    .btn-success { background: #16a34a; color: white; }
+    .alert { padding: 12px; border-radius: 6px; font-size: 13px; margin-bottom: 15px; }
+    .alert-error { background: #fee2e2; border: 1px solid #f87171; color: #991b1b; }
+    .alert-success { background: #dcfce7; border: 1px solid #86efac; color: #166534; }
+    .badge-otp { background: #fef3c7; color: #92400e; padding: 4px 8px; border-radius: 4px; font-family: monospace; font-size: 14px; font-weight: bold; }
+    .captcha-box { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; }
+    .captcha-img { background: #1e293b; color: #38bdf8; font-family: 'Courier New', monospace; font-size: 20px; font-weight: bold; letter-spacing: 5px; padding: 10px 20px; border-radius: 6px; user-select: none; }
+    .footer { text-align: center; padding: 15px; font-size: 12px; color: #64748b; border-top: 1px solid #e2e8f0; }
+  </style>
+</head>
+<body>
+  <div class="demo-banner">[DEMO SIMULATION - MOCK MAHADBT PORTAL - FOR LOCAL AUTOMATION TESTING ONLY]</div>
+  <header>
+    <div class="header-title">
+      <h1>Aaple Sarkar DBT Portal (महाDBT)</h1>
+      <p>Direct Benefit Transfer, Government of Maharashtra</p>
+    </div>
+    <div style="font-size: 12px; text-align: right;">
+      <span>Academic Year: <b>2026-2027</b></span>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="stepper">
+      <div id="step-tab-1" class="step active">1. Personal Profile</div>
+      <div id="step-tab-2" class="step">2. Document Upload (20KB - 50KB)</div>
+      <div id="step-tab-3" class="step">3. OTP & CAPTCHA Handoff</div>
+      <div id="step-tab-4" class="step">4. Acknowledgment</div>
+    </div>
+
+    <div class="form-content">
+      <!-- Step 1: Personal Details -->
+      <div id="step-1" class="step-section active">
+        <h3 style="margin-bottom: 20px; color: #1e3a8a;">Step 1: Beneficiary Profile Verification</h3>
+        <div class="form-group">
+          <label for="txtFullName">Full Name (As per Aadhaar/Profile):</label>
+          <input type="text" id="txtFullName" name="fullName" value="Ramesh Shamrao Patil">
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+          <div class="form-group">
+            <label for="selectGender">Gender:</label>
+            <select id="selectGender">
+              <option value="MALE" selected>Male</option>
+              <option value="FEMALE">Female</option>
+              <option value="OTHER">Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="txtDob">Date of Birth:</label>
+            <input type="text" id="txtDob" value="1978-05-15">
+          </div>
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+          <div class="form-group">
+            <label for="selectCaste">Caste Category:</label>
+            <select id="selectCaste">
+              <option value="OBC" selected>OBC (Other Backward Class)</option>
+              <option value="SC">SC (Scheduled Caste)</option>
+              <option value="ST">ST (Scheduled Tribe)</option>
+              <option value="OPEN">OPEN / General</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="txtAnnualIncome">Annual Family Income (Rs.):</label>
+            <input type="number" id="txtAnnualIncome" value="180000">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="selectDistrict">District:</label>
+          <select id="selectDistrict">
+            <option value="Kolhapur" selected>Kolhapur</option>
+            <option value="Pune">Pune</option>
+            <option value="Nashik">Nashik</option>
+          </select>
+        </div>
+        <button type="button" id="btnNextStep1" class="btn btn-primary" onclick="goToStep(2)">Save & Proceed to Document Upload &rarr;</button>
+      </div>
+
+      <!-- Step 2: Document Upload with Strict 20KB-50KB enforcement -->
+      <div id="step-2" class="step-section">
+        <h3 style="margin-bottom: 15px; color: #1e3a8a;">Step 2: Upload Compressed Certificate</h3>
+        <p style="font-size: 13px; color: #64748b; margin-bottom: 20px;">
+          <b>Portal Requirement:</b> Document file size must be strictly between <b>20 KB</b> and <b>50 KB</b>. Files outside this bracket will be rejected.
+        </p>
+
+        <div id="lblFileSizeError" class="alert alert-error" style="display: none;"></div>
+        <div id="lblUploadSuccess" class="alert alert-success" style="display: none;"></div>
+
+        <div class="form-group">
+          <label for="selectDocType">Select Document Type:</label>
+          <select id="selectDocType">
+            <option value="INCOME">Income Certificate</option>
+            <option value="CASTE">Caste Certificate</option>
+            <option value="DOMICILE">Domicile Certificate</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="fileUploadDoc">Choose File (JPEG / JPG):</label>
+          <input type="file" id="fileUploadDoc" accept="image/jpeg,image/png">
+        </div>
+
+        <div style="display: flex; gap: 10px;">
+          <button type="button" id="btnUploadDoc" class="btn btn-primary" onclick="validateAndUpload()">Validate & Upload File</button>
+          <button type="button" id="btnNextStep2" class="btn btn-success" style="display: none;" onclick="loadStep3()">Proceed to Verification &rarr;</button>
+        </div>
+      </div>
+
+      <!-- Step 3: CAPTCHA & OTP Handoff (The HITL Gate) -->
+      <div id="step-3" class="step-section">
+        <h3 style="margin-bottom: 15px; color: #1e3a8a;">Step 3: Human-in-the-Loop OTP & Security Verification</h3>
+        <div class="alert alert-success">
+          <b>RPA Co-Pilot Paused:</b> Playwright worker has paused and forwarded this screen to the Citizen UI. Please enter the OTP and CAPTCHA to confirm final submission.
+        </div>
+
+        <div class="form-group">
+          <label>Security CAPTCHA:</label>
+          <div class="captcha-box">
+            <div id="imgCaptcha" class="captcha-img">MHA482</div>
+            <input type="text" id="txtCaptchaInput" placeholder="Enter CAPTCHA here" style="max-width: 200px;">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Enter 6-Digit Mobile OTP:</label>
+          <div style="margin-bottom: 8px;">
+            <span style="font-size: 12px; color: #64748b;">Mock Portal SMS Simulation: OTP is </span>
+            <span id="lblOtpBadge" class="badge-otp">849201</span>
+          </div>
+          <input type="text" id="txtOtpInput" placeholder="Enter 6-digit OTP" style="max-width: 200px;">
+        </div>
+
+        <button type="button" id="btnFinalSubmit" class="btn btn-success" onclick="finalSubmit()">Confirm & Submit Application</button>
+      </div>
+
+      <!-- Step 4: Acknowledgment -->
+      <div id="step-4" class="step-section">
+        <div style="text-align: center; padding: 20px;">
+          <div style="font-size: 48px; color: #16a34a; margin-bottom: 10px;">&#10004;</div>
+          <h2 style="color: #1e3a8a; margin-bottom: 10px;">Application Successfully Submitted!</h2>
+          <p style="color: #64748b; font-size: 14px; margin-bottom: 20px;">Your post-matric welfare scholarship application has been registered with the MahaDBT Portal.</p>
+
+          <div style="background: #f1f5f9; padding: 15px; border-radius: 6px; display: inline-block; margin-bottom: 25px;">
+            <span style="font-size: 13px; color: #64748b;">Official Application Tracking ID:</span><br/>
+            <strong id="lblTrackingId" style="font-size: 22px; color: #0f172a; font-family: monospace;">MHA-2026-894123</strong>
+          </div>
+          <br/>
+          <button id="btnDownloadReceipt" class="btn btn-primary" onclick="alert('Receipt downloaded.')">Download Verifiable Receipt PDF</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      Government of Maharashtra &bull; MahaDBT Portal Clone &bull; Synthetic Demo Environment
+    </div>
+  </div>
+
+  <script>
+    let uploadedFile = null;
+
+    function goToStep(stepNum) {
+      document.querySelectorAll('.step-section').forEach(s => s.classList.remove('active'));
+      document.querySelectorAll('.step').forEach(t => t.classList.remove('active'));
+      document.getElementById('step-' + stepNum).classList.add('active');
+      document.getElementById('step-tab-' + stepNum).classList.add('active');
+    }
+
+    async function validateAndUpload() {
+      const fileInput = document.getElementById('fileUploadDoc');
+      const errBox = document.getElementById('lblFileSizeError');
+      const succBox = document.getElementById('lblUploadSuccess');
+      errBox.style.display = 'none';
+      succBox.style.display = 'none';
+
+      if (!fileInput.files.length) {
+        errBox.textContent = "Please select a file to upload.";
+        errBox.style.display = 'block';
+        return;
+      }
+
+      const file = fileInput.files[0];
+      const sizeBytes = file.size;
+      const sizeKb = (sizeBytes / 1024).toFixed(2);
+
+      // Check strictly 20KB to 50KB
+      if (sizeBytes < 20 * 1024) {
+        errBox.innerHTML = `<b>Upload Error:</b> File size (${sizeKb} KB) is below 20 KB limit. MahaDBT portal rejects files smaller than 20 KB. Please compress within [20KB, 50KB].`;
+        errBox.style.display = 'block';
+        return;
+      }
+      if (sizeBytes > 50 * 1024) {
+        errBox.innerHTML = `<b>Upload Error:</b> File size (${sizeKb} KB) exceeds 50 KB ceiling. MahaDBT portal rejects files larger than 50 KB. Please use the Pre-Flight Compressor.`;
+        errBox.style.display = 'block';
+        return;
+      }
+
+      succBox.innerHTML = `<b>Verification Success:</b> Document accepted (${sizeKb} KB is within [20KB, 50KB] bracket). Ready to proceed.`;
+      succBox.style.display = 'block';
+      document.getElementById('btnNextStep2').style.display = 'inline-block';
+      uploadedFile = file;
+    }
+
+    function loadStep3() {
+      // Generate random challenge
+      const randomCaptcha = "MHA" + Math.floor(100 + Math.random() * 900);
+      const randomOtp = "" + Math.floor(100000 + Math.random() * 900000);
+      document.getElementById('imgCaptcha').textContent = randomCaptcha;
+      document.getElementById('lblOtpBadge').textContent = randomOtp;
+      goToStep(3);
+    }
+
+    function finalSubmit() {
+      const captchaIn = document.getElementById('txtCaptchaInput').value.trim();
+      const captchaExpected = document.getElementById('imgCaptcha').textContent.trim();
+      const otpIn = document.getElementById('txtOtpInput').value.trim();
+      const otpExpected = document.getElementById('lblOtpBadge').textContent.trim();
+
+      if (captchaIn.toUpperCase() !== captchaExpected.toUpperCase()) {
+        alert("Incorrect CAPTCHA! Please re-enter.");
+        return;
+      }
+      if (otpIn !== otpExpected) {
+        alert("Incorrect OTP! Please enter the 6-digit code shown.");
+        return;
+      }
+
+      const trackingId = "MHA-2026-" + Math.floor(100000 + Math.random() * 900000);
+      document.getElementById('lblTrackingId').textContent = trackingId;
+      document.getElementById('step-tab-3').classList.add('completed');
+      goToStep(4);
+    }
+  </script>
+</body>
+</html>

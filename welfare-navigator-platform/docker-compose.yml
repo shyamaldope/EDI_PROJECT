@@ -1,0 +1,107 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: welfare_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgrespassword
+      POSTGRES_DB: welfare_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./backend/database/models.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    container_name: welfare_redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: welfare_backend
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=postgresql+asyncpg://postgres:postgrespassword@postgres:5432/welfare_db
+      - SYNC_DATABASE_URL=postgresql://postgres:postgrespassword@postgres:5432/welfare_db
+      - REDIS_URL=redis://redis:6379/0
+      - USE_CELERY=true
+      - USE_LOCAL_AI_FALLBACK=true
+      - REFERENCE_DATE=2026-10-22
+    volumes:
+      - ./backend:/app
+      - ./sample_artifacts:/app/sample_artifacts
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  celery_worker:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: welfare_celery_worker
+    command: celery -A celery_app.celery worker --loglevel=info
+    restart: unless-stopped
+    environment:
+      - DATABASE_URL=postgresql+asyncpg://postgres:postgrespassword@postgres:5432/welfare_db
+      - SYNC_DATABASE_URL=postgresql://postgres:postgrespassword@postgres:5432/welfare_db
+      - REDIS_URL=redis://redis:6379/0
+      - USE_CELERY=true
+      - USE_LOCAL_AI_FALLBACK=true
+    volumes:
+      - ./backend:/app
+    depends_on:
+      - backend
+      - redis
+
+  mock_portals:
+    build:
+      context: ./mock_gov_portals
+      dockerfile: Dockerfile
+    container_name: welfare_mock_portals
+    restart: unless-stopped
+    ports:
+      - "8001:8001"
+    volumes:
+      - ./mock_gov_portals:/app
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: welfare_frontend
+    restart: unless-stopped
+    ports:
+      - "5173:5173"
+    environment:
+      - VITE_API_BASE_URL=http://localhost:8000
+      - VITE_MOCK_PORTAL_URL=http://localhost:8001
+    depends_on:
+      - backend
+
+volumes:
+  postgres_data:
+  redis_data:

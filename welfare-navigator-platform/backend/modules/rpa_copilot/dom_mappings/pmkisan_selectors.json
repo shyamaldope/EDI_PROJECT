@@ -1,0 +1,29 @@
+{
+  "portal_name": "PM-KISAN Samman Nidhi Mock Portal",
+  "base_url": "http://localhost:8001/pmkisan",
+  "steps": {
+    "step_1_farmer_details": {
+      "farmer_name": "#txtFarmerName",
+      "gender": "#selectFarmerGender",
+      "category": "#selectFarmerCategory",
+      "landholding": "#txtLandholdingAcres",
+      "district": "#selectFarmerDistrict",
+      "btn_next": "#btnNextFarmerStep"
+    },
+    "step_2_document": {
+      "file_input": "#fileLandRecord",
+      "upload_btn": "#btnUploadLandRecord",
+      "btn_next": "#btnNextLandStep"
+    },
+    "step_3_verification": {
+      "captcha_display": "#imgCaptchaPmk",
+      "captcha_input": "#txtCaptchaPmk",
+      "otp_display_badge": "#lblOtpBadgePmk",
+      "otp_input": "#txtOtpPmk",
+      "btn_verify_submit": "#btnFinalSubmitPmk"
+    },
+    "step_4_confirmation": {
+      "tracking_id": "#lblTrackingIdPmk"
+    }
+  }
+}
