@@ -23,7 +23,7 @@
 * **Repository Owner:** `shyamaldope`
 * **Repository URL:** [https://github.com/shyamaldope/EDI_PROJECT](https://github.com/shyamaldope/EDI_PROJECT)
 * **Clone URL (HTTPS):** `https://github.com/shyamaldope/EDI_PROJECT.git`
-* **Visibility:** **Private** (Encrypted and restricted to authorized user)
+* **Visibility:** **Public** (Open for direct Gemini / AI Studio URL import)
 * **Default Branch:** `main`
 * **Initial Commit SHA:** `3d6955eadc0790e4971ca3f0a2af3de11eb25d03`
 * **Latest Commit SHA:** `3d6955eadc0790e4971ca3f0a2af3de11eb25d03`
